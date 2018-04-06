@@ -1,0 +1,15 @@
+{% extends "MainApp/wrapper.html" %}
+{% block title%}
+  Билет №{{task.quest}}
+{%endblock%}
+
+{% block content%}
+    <h2 class="text-info">{{task.quest}}</h2>
+    <form action="variant/{{task.id}}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" class="btn btn-primary btn-lg" value="Подтвердить">
+
+    </form>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "MainApp/wrapper.html" %}
+{% block title%}
+  Варианты к заданию №{{task.quest}}
+{%endblock%}
+
+
+{% block content%}
+    {% for var in variants%}
+        <h3>Вариант:___{{var.variant}}</h3>
+        <h3>Статус:___{{var.check}}</h3>
+        <h3>Время:___{{var.time}}</h3>
+        <hr>
+    {% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "MainApp/wrapper.html" %}
+{% block title%}
+  Статистика по стратегии {{strategy}}
+{%endblock%}
+
+{% block content%}
+    {% for exp in experiment%}
+        <a href="/tasks/experiment/{{exp.id}}">Эксперимент пользователя {{exp.name}}</a>
+        <h1></h1>
+        <h1></h1>
+        <h1></h1>
+    {% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "MainApp/wrapper.html" %}
+{% block title%}
+  Билет №{{task.quest}}
+{%endblock%}
+
+
+{% block content%}
+    <h2 class="text-info">{{task.quest}}</h2>
+    <h3> Ваши ответы: </h3>
+    {% for variant in variants %}
+    <h4>{{variant.variant}}  Время: <em>{{variant.time}}</em> секунд</h4>
+    {% endfor %}
+    <form action="addvariant/{{task.id}}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" class="btn btn-primary btn-lg" value="Подтвердить">
+
+    </form>
+
+{% endblock %}

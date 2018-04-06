@@ -1,0 +1,28 @@
+{% extends "MainApp/wrapper.html" %}
+{% block title%}
+  Эксперимент
+{%endblock%}
+
+{% block content %}
+<table border="1px" solid grey>
+    <tr>
+        <th>Задание</th>
+        <th>Уровень</th>
+        <th>Статус</th>
+        <th>Варианты</th>
+    </tr>
+    {% for task in tasks%}
+        <tr>
+            <td align="center">{{task.quest}}</td>
+            <td align="center">{{task.level}}</td>
+            <td align="center">{{task.checking}}</td>
+            <td align="center"><a href="{{task.id}}/var/"> Варианты </a></td>
+
+        </tr>
+
+
+
+    {% endfor %}
+</table>
+
+{% endblock %}
