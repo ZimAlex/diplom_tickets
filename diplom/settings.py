@@ -27,7 +27,7 @@ SECRET_KEY = 'c!&p#a!h2%bmo(wc70jca2qxj2$cjf4w6nws(y8r3gl0)&x4z8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['zelion.pythonanywhere.com']
 
 
 # Application definition
