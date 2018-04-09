@@ -26,7 +26,7 @@ def generate(request):
         repl = True
     else:
         repl = False
-    exp = Experiment(
+    exp = experiment(
         replay=repl,
         info=inf,
         strategy=r,
@@ -37,7 +37,7 @@ def generate(request):
     g = generator.generate()
     for lev in range(0, len(g)):
         for key in (g[lev]):
-            t = Task(
+            t = task(
                 task_user=exp,
                 level=lev+1,
                 quest=key,
@@ -50,7 +50,7 @@ def generate(request):
 
 
 def main(request):
-    exp = Experiment.objects.get(name = request.user)
+    exp = experiment.objects.get(name = request.user)
     exp.startTime = time.clock()
     exp.save()
     args = {}
@@ -62,13 +62,13 @@ def createList(request):
     l = []
     exp = Experiment.objects.get(name=request.user)
     strategy = exp.strategy
-    for t in Task.objects.filter(task_user__name=request.user):
+    for t in task.objects.filter(task_user__name=request.user):
         l.append(str(t.id))
     if strategy == 5:
         l = l.reverse()
     elif strategy == 6:
         l = random.shuffle(l)
-    exp = Experiment.objects.get(name=request.user)
+    exp = experiment.objects.get(name=request.user)
     exp.taskList = ','.join(l)
     exp.save(force_insert=False)
     return redirect('/tasks/task/%s' % l[0])
@@ -77,7 +77,7 @@ def createList(request):
 def getTask(request, task_id):
 
     variant_form = VariantForm
-    exp = Experiment.objects.get(name=request.user)
+    exp = experiment.objects.get(name=request.user)
     if exp.mistake:
         tl = exp.mistakeList.split(',')
     else:
@@ -88,7 +88,7 @@ def getTask(request, task_id):
     if  exp.strategy != 8 and tl.index(task_id) == len(tl)-1:
         if exp.replay and not exp.mistake:
             for id in tl:
-                task = Task.objects.get(id=id)
+                task = task.objects.get(id=id)
                 if task.checking != 'Решено' and task.checiking != 'Счастливый, но не ближайший':
                     ml.append(id)
             exp.mistakeList = ','.join(ml)
@@ -99,9 +99,9 @@ def getTask(request, task_id):
             return redirect('/tasks/finalPage')
     args = {}
     args.update(csrf(request))
-    args['task'] = Task.objects.get(id=task_id)
+    args['task'] = task.objects.get(id=task_id)
     args['form'] = variant_form
-    t = Task.objects.get(id=task_id)
+    t = task.objects.get(id=task_id)
     t.startTime = time.clock()
     t.save()
     if exp.info == "Открыто":

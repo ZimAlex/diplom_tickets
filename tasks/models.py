@@ -6,7 +6,7 @@ from django.db import models
 import time
 
 
-class Experiment(models.Model):
+class experiment(models.Model):
     strategy = models.IntegerField()
     info = models.CharField(max_length=7)
     name = models.CharField(max_length=20)
@@ -14,11 +14,11 @@ class Experiment(models.Model):
     mistakeList = models.CharField(max_length=9000)
     lastTask = models.CharField(max_length=100)
     startTime = models.FloatField(verbose_name='Время начала эксперимента', default=time.clock())
-    Time = models.FloatField(verbose_name='Время затраченное на эксперимент', default=time.clock())
+    time = models.FloatField(verbose_name='Время затраченное на эксперимент', default=time.clock())
     replay = models.BooleanField()
     mistake = models.BooleanField()
 
-class Task(models.Model):
+class task(models.Model):
     task_user = models.ForeignKey(Experiment, on_delete=models.CASCADE)
     level = models.IntegerField()
     quest = models.CharField(max_length=6, verbose_name='Задание')
@@ -27,7 +27,7 @@ class Task(models.Model):
     startTime = models.FloatField(verbose_name='Время попадания на страницу', default=time.clock())
 
 
-class Variant(models.Model):
+class variant(models.Model):
     variant_task = models.ForeignKey(Task, on_delete=models.CASCADE)
     variant = models.CharField(max_length=6, verbose_name='Ваш Ответ ', default="")
     check = models.CharField(max_length=100, default='Не счастливый')
