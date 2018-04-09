@@ -1,6 +1,6 @@
 
 
-from .models import Variant
+from .models import variant
 
 from django.forms import ModelForm
 
@@ -11,6 +11,6 @@ class VariantForm(ModelForm):
 
 
     class Meta:
-        model = Variant
+        model = variant
         fields = ['variant']
 
