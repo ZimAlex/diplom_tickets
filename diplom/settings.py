@@ -26,8 +26,8 @@ SECRET_KEY = 'c!&p#a!h2%bmo(wc70jca2qxj2$cjf4w6nws(y8r3gl0)&x4z8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = ['zelion.pythonanywhere.com']
+# 'zelion.pythonanywhere.com',
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -80,8 +80,8 @@ WSGI_APPLICATION = 'diplom.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'NAME': '/home/Zelion/diplom_tickets/sqlite3.db'
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 'NAME': '/home/Zelion/diplom_tickets/sqlite3.db'
     }
 
 }

@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import experiment, task_m, variant
+from .models import Experiment, Task_m, Variant
 
-admin.site.register(experiment)
-admin.site.register(task_m)
-admin.site.register(variant)
+admin.site.register(Experiment)
+admin.site.register(Task_m)
+admin.site.register(Variant)
 # Register your models here.
