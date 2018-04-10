@@ -18,6 +18,7 @@ class Experiment(models.Model):
     replay = models.BooleanField()
     mistake = models.BooleanField()
 
+
 class Task_m(models.Model):
     task_user = models.ForeignKey(Experiment, on_delete=models.CASCADE)
     level = models.IntegerField()
