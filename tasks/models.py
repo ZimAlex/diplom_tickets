@@ -19,7 +19,7 @@ class Experiment(models.Model):
     mistake = models.BooleanField()
 
 
-class Task_m(models.Model):
+class Task(models.Model):
     task_user = models.ForeignKey(Experiment, on_delete=models.CASCADE)
     level = models.IntegerField()
     quest = models.CharField(max_length=6, verbose_name='Задание')
@@ -29,7 +29,7 @@ class Task_m(models.Model):
 
 
 class Variant(models.Model):
-    variant_task = models.ForeignKey(Task_m, on_delete=models.CASCADE)
+    variant_task = models.ForeignKey(Task, on_delete=models.CASCADE)
     variant = models.CharField(max_length=6, verbose_name='Ваш Ответ ', default="")
     check = models.CharField(max_length=100, default='Не счастливый')
     answerTime = models.FloatField(verbose_name='Время ответа', default=time.clock())
