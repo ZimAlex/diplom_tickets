@@ -27,47 +27,47 @@ def generate(request):
     else:
         repl = False
     exp = Experiment(
-        replay=repl,
-        info=inf,
-        strategy=r,
-        mistake=False,
-        name=request.user
+        Replay=repl,
+        Info=inf,
+        Strategy=r,
+        Mistake=False,
+        Name=request.user
     )
     exp.save(force_insert=True)
     g = generator.generate()
     for lev in range(0, len(g)):
         for key in (g[lev]):
             t = Task(
-                task_user=exp,
-                level=lev+1,
-                quest=key,
-                answer=g[lev][key],
+                Task_user=exp,
+                Level=lev+1,
+                Quest=key,
+                Answer=g[lev][key],
             )
             t.save(force_insert=True)
     return redirect('/tasks/intro')
 
 
 def main(request):
-    exp = Experiment.objects.get(name = request.user)
-    exp.startTime = time.clock()
+    exp = Experiment.objects.get(Name = request.user)
+    exp.StartTime = time.clock()
     exp.save()
     args = {}
-    args['strategy'] = exp.strategy
+    args['strategy'] = exp.Strategy
     return render_to_response('tasks/mainPage.html', args)
 
 
 def createList(request):
     l = []
-    exp = Experiment.objects.get(name=request.user)
-    strategy = exp.strategy
-    for t in Task.objects.filter(task_user__name=request.user):
+    exp = Experiment.objects.get(Name=request.user)
+    strategy = exp.Strategy
+    for t in Task.objects.filter(Task_user__Name=request.user):
         l.append(str(t.id))
     if strategy == 5:
         l = l.reverse()
     elif strategy == 6:
         l = random.shuffle(l)
-    exp = Experiment.objects.get(name=request.user)
-    exp.taskList = ','.join(l)
+    exp = Experiment.objects.get(Name=request.user)
+    exp.TaskList = ','.join(l)
     exp.save(force_insert=False)
     return redirect('/tasks/task/%s' % l[0])
 
@@ -75,22 +75,22 @@ def createList(request):
 def getTask(request, task_id):
 
     variant_form = VariantForm
-    exp = Experiment.objects.get(name=request.user)
-    if exp.mistake:
-        tl = exp.mistakeList.split(',')
+    exp = Experiment.objects.get(Name=request.user)
+    if exp.Mistake:
+        tl = exp.MistakeList.split(',')
     else:
-        tl = exp.taskList.split(',')
+        tl = exp.TaskList.split(',')
     ml = []
 
 
     if  exp.strategy != 8 and tl.index(task_id) == len(tl)-1:
-        if exp.replay and not exp.mistake:
+        if exp.Replay and not exp.Mistake:
             for id in tl:
                 task = Task.objects.get(id=id)
-                if task.checking != 'Решено' and task.checiking != 'Счастливый, но не ближайший':
+                if task.Checking != 'Решено' and task.checiking != 'Счастливый, но не ближайший':
                     ml.append(id)
-            exp.mistakeList = ','.join(ml)
-            exp.mistake = True
+            exp.MistakeList = ','.join(ml)
+            exp.Mistake = True
             exp.save()
             return redirect('/tasks/mistakes/%s' % ml[0])
         else:
@@ -98,19 +98,19 @@ def getTask(request, task_id):
     args = {}
     args.update(csrf(request))
     args['task'] = Task.objects.get(id=task_id)
-    args['form'] = variant_form
+    args['form'] = Variant_form
     t = Task.objects.get(id=task_id)
-    t.startTime = time.clock()
+    t.StartTime = time.clock()
     t.save()
-    tList = exp.taskList.split(',')
-    mList = exp.mistakeList.split(',')
-    if exp.info == "Открыто":
-        if not exp.mistake and str(int(task_id)-1) in tList:
+    tList = exp.TaskList.split(',')
+    mList = exp.MistakeList.split(',')
+    if exp.Info == "Открыто":
+        if not exp.Mistake and str(int(task_id)-1) in tList:
             t2 = Task.objects.get(id=str(int(task_id)-1))
-            args['check'] = t2.checking
-        elif exp.mistake and str(int(task_id)-1) in mList:
+            args['check'] = t2.Checking
+        elif exp.Mistake and str(int(task_id)-1) in mList:
             t2 = Task.objects.get(id=str(int(task_id) - 1))
-            args['check'] = t2.checking
+            args['check'] = t2.Checking
         return render_to_response('tasks/task_cl_2.html', args)
     return render_to_response('tasks/task_cl.html', args)
 
@@ -127,36 +127,36 @@ def addVariant_cl(request, task_id):
         if form.is_valid():
             t = Task.objects.get(id=task_id)
             var = form.save(commit=False)
-            if not isint(var.variant) or len(var.variant) != 6:
+            if not isint(var.Variant) or len(var.Variant) != 6:
                 return redirect('/tasks/task/%s' % task_id)
-            var.variant_task = Task.objects.get(id=task_id)
-            nums = str(var.variant)
+            var.Variant_task = Task.objects.get(id=task_id)
+            nums = str(var.Variant)
             s1 = int(nums[0]) + int(nums[1]) + int(nums[2])
             s2 = int(nums[3]) + int(nums[4]) + int(nums[5])
 
 
-            if s1 == s2 and var.variant != Task.objects.get(id=task_id).answer:
-                var.check = 'Счастливый, но не ближайший'
-                t.checking = 'Счастливый, но не ближайший'
-            elif var.variant == Task.objects.get(id=task_id).answer:
-                var.check = 'Решено'
-                t.checking = 'Решено'
+            if s1 == s2 and var.Variant != Task.objects.get(id=task_id).Answer:
+                var.Check = 'Счастливый, но не ближайший'
+                t.Checking = 'Счастливый, но не ближайший'
+            elif var.Variant == Task.objects.get(id=task_id).Answer:
+                var.Check = 'Решено'
+                t.Checking = 'Решено'
             else:
-                var.check = Variant.check
-            var.answerTime = time.clock()
+                var.Check = Variant.Check
+            var.AnswerTime = time.clock()
             # var.time = var.answerTime - t.startTime
-            var.time = float('{:.3f}'.format(var.answerTime - t.startTime))
+            var.Time = float('{:.3f}'.format(var.AnswerTime - t.StartTime))
             t.save()
             form.save()
-    exp = Experiment.objects.get(name=request.user)
-    tl = exp.taskList.split(',')
-    if exp.mistake:
+    exp = Experiment.objects.get(Name=request.user)
+    tl = exp.TaskList.split(',')
+    if exp.Mistake:
         check = True
     else:
         check = tl.index(task_id) == 2 or tl.index(task_id) == 5 or tl.index(task_id) == 8 or tl.index(task_id) == 11 or tl.index(task_id) == 14 or tl.index(task_id) == 17
-    if exp.strategy == 8 and check:
+    if exp.Strategy == 8 and check:
 
-        if not exp.mistake:
+        if not exp.Mistake:
 
             if tl.index(task_id) == 2:
                 lev = 1
@@ -171,11 +171,11 @@ def addVariant_cl(request, task_id):
             elif tl.index(task_id) == 17:
                 lev = 6
         else:
-            t = Task.objects.get(id=int(exp.lastTask))
-            lev = t.level
+            t = Task.objects.get(id=int(exp.LastTask))
+            lev = t.Level
         stat = 0
-        for t in Task.objects.filter(level=lev, task_user=exp):
-            if t.checking == "Решено":
+        for t in Task.objects.filter(Level=lev, Task_user=exp):
+            if t.Checking == "Решено":
                 stat += 1
             else:
                 stat = 0
@@ -188,43 +188,43 @@ def addVariant_cl(request, task_id):
                 k = key
                 v = g[key]
             task_lv1 = Task(
-                task_user=exp,
-                level=lev,
-                quest=k,
-                answer=v
+                Task_user=exp,
+                Level=lev,
+                Quest=k,
+                Answer=v
             )
             task_lv1.save(force_insert=True)
             id = task_lv1.id
-            if not exp.mistake:
-                exp.lastTask = str(task_id)
-            exp.mistake = True
-            if exp.mistakeList != '':
-                li = exp.mistakeList.split(',')
+            if not exp.Mistake:
+                exp.LastTask = str(task_id)
+            exp.Mistake = True
+            if exp.MistakeList != '':
+                li = exp.MistakeList.split(',')
                 li.append(str(id))
-                exp.mistakeList = ','.join(li)
+                exp.MistakeList = ','.join(li)
             else:
                 li.append(str(id))
-                exp.mistakeList = ','.join(li)
+                exp.MistakeList = ','.join(li)
 
             exp.save()
             return redirect('/tasks/task/%s' % li[len(li)-1])
         elif stat == 3:
-            if exp.mistake:
-                exp.mistake = False
+            if exp.Mistake:
+                exp.Mistake = False
                 exp.save()
-                tl = exp.taskList.split(',')
-                if tl.index(exp.lastTask) == len(tl)-1:
+                tl = exp.TaskList.split(',')
+                if tl.index(exp.LastTask) == len(tl)-1:
                     return redirect('/tasks/finalPage')
-                return redirect('/tasks/task/%s' % tl[tl.index(exp.lastTask)+1])
+                return redirect('/tasks/task/%s' % tl[tl.index(exp.LastTask)+1])
             else:
                 if tl.index(task_id) == len(tl)-1:
                     return redirect('/tasks/finalPage')
 
 
-    tl = exp.taskList.split(',')
+    tl = exp.TaskList.split(',')
 
-    if exp.mistake:
-        tl = exp.mistakeList.split(',')
+    if exp.Mistake:
+        tl = exp.MistakeList.split(',')
 
     return redirect('/tasks/task/%s' % tl[tl.index(task_id)+1])
 
@@ -236,10 +236,10 @@ def task(request, task_id):
     args['task'] = Task.objects.get(id=task_id)
     args['form'] = variant_form
     t = Task.objects.get(id=task_id)
-    t.startTime = time.clock()
+    t.StartTime = time.clock()
     t.save()
-    exp = experiment.objects.get(name=request.user)
-    if exp.info == 'Закрыто':
+    exp = experiment.objects.get(Name=request.user)
+    if exp.Info == 'Закрыто':
         return render_to_response('tasks/task_cl_1.html', args)
     args['variants'] = Variant.objects.filter(variant_task=Task.objects.get(id=task_id))
     return render_to_response('tasks/task.html', args)
@@ -251,48 +251,49 @@ def addVariant(request, task_id):
         if form.is_valid():
             t = Task.objects.get(id=task_id)
             var = form.save(commit=False)
-            var.variant_task = Task.objects.get(id=task_id)
-            nums = str(var.variant)
+            var.Variant_task = Task.objects.get(id=task_id)
+            nums = str(var.Variant)
             s1 = int(nums[0]) + int(nums[1]) + int(nums[2])
             s2 = int(nums[3]) + int(nums[4]) + int(nums[5])
-            if s1 == s2 and var.variant != Task.objects.get(id=task_id).answer:
-                var.check = 'Счастливый, но не ближайший'
-                t.checking = 'Счастливый, но не ближайший'
-            elif var.variant == Task.objects.get(id=task_id).answer:
-                var.check = 'Решено'
-                t.checking = 'Решено'
+            if s1 == s2 and var.variant != Task.objects.get(id=task_id).Answer:
+                var.Check = 'Счастливый, но не ближайший'
+                t.Checking = 'Счастливый, но не ближайший'
+            elif var.Variant == Task.objects.get(id=task_id).Answer:
+                var.Check = 'Решено'
+                t.Checking = 'Решено'
             else:
-                var.check = Variant.check
-            var.answerTime = time.clock()
-            # var.time = var.answerTime - t.startTime
-            var.time = float('{:.3f}'.format(var.answerTime - t.startTime))
+                var.Check = Variant.Check
+            var.AnswerTime = time.clock()
+            # var.time = var.answerTime - t.StartTime
+            var.Time = float('{:.3f}'.format(var.AnswerTime - t.StartTime))
             t.save()
             form.save()
 
         check = 0
-        for task in Task.objects.filter(task_user__name = request.user):
-            if task.checking == 'Решено':
+        for task in Task.objects.filter(Task_user__Name = request.user):
+            if task.Checking == 'Решено':
                 check += 1
             else:
                 break
-            if check == len(Task.objects.filter(task_user__name = request.user)):
+            if check == len(Task.objects.filter(Task_user__Name = request.user)):
                 return redirect('/tasks/finalPage')
-    exp = experiment.objects.get(name=request.user)
-    strategy = exp.strategy
+    exp = experiment.objects.get(Name=request.user)
+    strategy = exp.Strategy
     return redirect('/tasks/intro/%s/taskList' %strategy)
 
 
 def final(request):
     check = 0
-    for t in Task.objects.filter(task_user__name=request.user):
-        if t.checking == 'Решено':
+    for t in Task.objects.filter(Task_user__Name=request.user):
+        if t.Checking == 'Решено':
             check += 1
-    exp = experiment.objects.get(name=request.user)
-    exp.timing = float('{:.3f}'.format(time.clock() - exp.startTime))
+    exp = experiment.objects.get(Name=request.user)
+    exp.Timing = float('{:.3f}'.format(time.clock() - exp.StartTime))
     exp.save()
     args = {}
-    if exp.strategy == 7 or exp.strategy == 8:
-        args['time'] = exp.timing
+    strategy = exp.Strategy
+    if strategy == 7 or strategy == 8:
+        args['time'] = exp.Timing
         return render_to_response('tasks/final.html', args)
 
     args['checks'] = str(check)
@@ -301,16 +302,16 @@ def final(request):
 
 def taskList(request):
     args = {}
-    exp = experiment.objects.get(name=request.user)
-    strategy = exp.strategy
+    exp = experiment.objects.get(Name=request.user)
+    strategy = exp.Strategy
     if strategy == 1:
-        args['tasks'] = Task.objects.filter(task_user__name=request.user)
+        args['tasks'] = Task.objects.filter(Task_user__Name=request.user)
     elif strategy == 2:
-        args['tasks'] = Task.objects.filter(task_user__name=request.user).order_by('-level')
+        args['tasks'] = Task.objects.filter(Task_user__Name=request.user).order_by('-Level')
     elif strategy == 3:
-        args['tasks'] = Task.objects.filter(task_user__name=request.user).order_by('?')
+        args['tasks'] = Task.objects.filter(Task_user__Name=request.user).order_by('?')
     args['strategy'] = strategy
-    if exp.info == 'Закрыто':
+    if exp.Info == 'Закрыто':
         return render_to_response('tasks/tasks_cl.html', args)
     return render_to_response('tasks/tasks.html', args)
 
@@ -320,18 +321,18 @@ def statistics(request):
 
 def statistic(request, strategy):
     args ={}
-    args['experiment'] = experiment.objects.filter(strategy=strategy)
+    args['experiment'] = experiment.objects.filter(Strategy=strategy)
     args['strategy'] = strategy
     return render_to_response('tasks/statistic_list.html', args)
 
 def experiment(request, experiment_id):
     args = {}
-    args['tasks'] = Task.objects.filter(task_user=experiment.objects.get(id=experiment_id))
+    args['tasks'] = Task.objects.filter(Task_user=experiment.objects.get(id=experiment_id))
     return render_to_response('tasks/experiment.html', args)
 
 def variants(request, task_id):
     args = {}
-    args['variants'] = Variant.objects.filter(variant_task=Task.objects.get(id=task_id))
+    args['variants'] = Variant.objects.filter(Variant_task=Task.objects.get(id=task_id))
     args['task'] = Task.objects.get(id=task_id)
     return render_to_response('tasks/variants.html', args)
 

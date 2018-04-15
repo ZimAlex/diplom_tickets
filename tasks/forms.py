@@ -12,5 +12,5 @@ class VariantForm(ModelForm):
 
     class Meta:
         model = Variant
-        fields = ['variant']
+        fields = ['Variant']
 
