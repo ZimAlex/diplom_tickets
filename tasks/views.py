@@ -103,10 +103,10 @@ def getTask(request, task_id):
     t.startTime = time.clock()
     t.save()
     if exp.info == "Открыто":
-        if not exp.mistake and str(int(task_id)-1) in exp.taskList:
+        if not exp.mistake and str(int(task_id)-1) in exp.taskList.split(','):
             t2 = Task.objects.get(id=str(int(task_id)-1))
             args['check'] = t2.checking
-        elif exp.mistake and str(int(task_id)-1) in exp.mistakeList:
+        elif exp.mistake and str(int(task_id)-1) in exp.mistakeList.split(','):
             t2 = Task.objects.get(id=str(int(task_id) - 1))
             args['check'] = t2.checking
         return render_to_response('tasks/task_cl_2.html', args)
