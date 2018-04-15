@@ -21,7 +21,7 @@ class Experiment(models.Model):
 
 class Task(models.Model):
     task_user = models.ForeignKey(Experiment, on_delete=models.CASCADE)
-    level = models.IntegerField(null=True, blank=True)
+    # level = models.IntegerField(null=True, blank=True)
     quest = models.CharField(max_length=6, verbose_name='Задание', null=True, blank=True)
     answer = models.CharField(max_length=6, verbose_name='Правильный ответ', null=True, blank=True)
     checking = models.CharField(max_length=100, default='Не счастливый', null=True, blank=True)
