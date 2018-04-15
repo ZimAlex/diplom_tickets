@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             name='lev_user',
         ),
         migrations.AddField(
-            model_name='task',
+            model_name='Task',
             name='level',
             field=models.IntegerField(default=1),
             preserve_default=False,

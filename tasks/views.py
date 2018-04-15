@@ -286,11 +286,11 @@ def final(request):
         if t.checking == 'Решено':
             check += 1
     exp = experiment.objects.get(name=request.user)
-    exp.Time = float('{:.3f}'.format(time.clock() - exp.startTime))
+    exp.timing = float('{:.3f}'.format(time.clock() - exp.startTime))
     exp.save()
     args = {}
     if exp.strategy == 7 or exp.strategy == 8:
-        args['time'] = exp.Time
+        args['time'] = exp.timing
         return render_to_response('tasks/final.html', args)
 
     args['checks'] = str(check)
