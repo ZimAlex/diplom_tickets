@@ -102,11 +102,13 @@ def getTask(request, task_id):
     t = Task.objects.get(id=task_id)
     t.startTime = time.clock()
     t.save()
+    tList = exp.taskList.split(',')
+    mList = exp.mistakeList.split(',')
     if exp.info == "Открыто":
-        if not exp.mistake and str(int(task_id)-1) in exp.taskList.split(','):
+        if not exp.mistake and str(int(task_id)-1) in tList:
             t2 = Task.objects.get(id=str(int(task_id)-1))
             args['check'] = t2.checking
-        elif exp.mistake and str(int(task_id)-1) in exp.mistakeList.split(','):
+        elif exp.mistake and str(int(task_id)-1) in mList:
             t2 = Task.objects.get(id=str(int(task_id) - 1))
             args['check'] = t2.checking
         return render_to_response('tasks/task_cl_2.html', args)
