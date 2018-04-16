@@ -48,7 +48,7 @@ def generate(request):
 
 
 def main(request):
-    exp = Experiment.objects.get(Name = request.user)
+    exp = Experiment.objects.get(Name=request.user)
     exp.StartTime = time.clock()
     exp.save()
     args = {}
@@ -83,7 +83,7 @@ def getTask(request, task_id):
     ml = []
 
 
-    if  exp.strategy != 8 and tl.index(task_id) == len(tl)-1:
+    if  exp.Strategy != 8 and tl.index(task_id) == len(tl)-1:
         if exp.Replay and not exp.Mistake:
             for id in tl:
                 task = Task.objects.get(id=id)
@@ -98,7 +98,7 @@ def getTask(request, task_id):
     args = {}
     args.update(csrf(request))
     args['task'] = Task.objects.get(id=task_id)
-    args['form'] = Variant_form
+    args['form'] = variant_form
     t = Task.objects.get(id=task_id)
     t.StartTime = time.clock()
     t.save()

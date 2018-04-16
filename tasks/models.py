@@ -8,7 +8,7 @@ import time
 
 class Experiment(models.Model):
     Strategy = models.IntegerField(null=True, blank=True)
-    Info = models.CharField(max_length=7,null=True, blank=True)
+    Info = models.CharField(max_length=7, null=True, blank=True)
     Name = models.CharField(max_length=20, null=True, blank=True)
     TaskList = models.CharField(max_length=9000, null=True, blank=True)
     MistakeList = models.CharField(max_length=9000, null=True, blank=True)
