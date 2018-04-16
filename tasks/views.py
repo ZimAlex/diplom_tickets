@@ -103,7 +103,8 @@ def getTask(request, task_id):
     t.StartTime = time.clock()
     t.save()
     tList = exp.TaskList.split(',')
-    mList = exp.MistakeList.split(',')
+    if exp.Mistake:
+        mList = exp.MistakeList.split(',')
     if exp.Info == "Открыто":
         if not exp.Mistake and str(int(task_id)-1) in tList:
             t2 = Task.objects.get(id=str(int(task_id)-1))
