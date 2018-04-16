@@ -1,10 +1,10 @@
 {% extends "mainApp/wrapper.html" %}
 {% block title%}
-  Билет №{{task.quest}}
+  Билет №{{task.Quest}}
 {%endblock%}
 
 {% block content%}
-    <h2 class="text-info">{{task.quest}}</h2>
+    <h2 class="text-info">{{task.Quest}}</h2>
     <form action="variant/{{task.id}}" method="post">
         {% csrf_token %}
         {{ form }}
