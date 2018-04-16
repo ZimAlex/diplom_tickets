@@ -13,8 +13,9 @@ class Experiment(models.Model):
     TaskList = models.CharField(max_length=9000, null=True, blank=True)
     MistakeList = models.CharField(max_length=9000)
     LastTask = models.CharField(max_length=100)
-    StartTime = models.FloatField(verbose_name='Время начала эксперимента', default=time.clock(), null=True, blank=True)
-    Timing = models.FloatField(verbose_name='Время затраченное на эксперимент', default=time.clock(), null=True, blank=True)
+    StartTime = models.FloatField(verbose_name='Время начала эксперимента', default=0, null=True, blank=True)
+    EndTime = models.FloatField(verbose_name='Время окончания эксперимента', default=0, null=True, blank=True)
+    Timing = models.FloatField(verbose_name='Время затраченное на эксперимент', default=0, null=True, blank=True)
     Replay = models.BooleanField()
     Mistake = models.BooleanField()
 

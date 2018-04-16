@@ -49,7 +49,7 @@ def generate(request):
 
 def main(request):
     exp = Experiment.objects.get(Name=request.user)
-    exp.StartTime = time.clock()
+    exp.StartTime = time.ctime()
     exp.save()
     args = {}
     args['strategy'] = exp.Strategy
@@ -100,7 +100,7 @@ def getTask(request, task_id):
     args['task'] = Task.objects.get(id=task_id)
     args['form'] = variant_form
     t = Task.objects.get(id=task_id)
-    t.StartTime = time.clock()
+    t.StartTime = time.ctime()
     t.save()
     tList = exp.TaskList.split(',')
     if exp.Mistake:
@@ -144,7 +144,7 @@ def addVariant_cl(request, task_id):
                 t.Checking = 'Решено'
             else:
                 var.Check = Variant.Check
-            var.AnswerTime = time.clock()
+            var.AnswerTime = time.ctime()
             # var.time = var.answerTime - t.startTime
             var.Time = float('{:.3f}'.format(var.AnswerTime - t.StartTime))
             t.save()
@@ -237,7 +237,7 @@ def task(request, task_id):
     args['task'] = Task.objects.get(id=task_id)
     args['form'] = variant_form
     t = Task.objects.get(id=task_id)
-    t.StartTime = time.clock()
+    t.StartTime = time.ctime()
     t.save()
     exp = experiment.objects.get(Name=request.user)
     if exp.Info == 'Закрыто':
@@ -264,7 +264,7 @@ def addVariant(request, task_id):
                 t.Checking = 'Решено'
             else:
                 var.Check = Variant.Check
-            var.AnswerTime = time.clock()
+            var.AnswerTime = time.ctime()
             # var.time = var.answerTime - t.StartTime
             var.Time = float('{:.3f}'.format(var.AnswerTime - t.StartTime))
             t.save()
@@ -289,7 +289,8 @@ def final(request):
         if t.Checking == 'Решено':
             check += 1
     exp = Experiment.objects.get(Name=request.user)
-    exp.Timing = float('{:.3f}'.format(time.clock() - exp.StartTime))
+    exp.EndTime = time.ctime()
+    exp.Timing = float('{:.3f}'.format(exp.EndTime - exp.StartTime))
     exp.save()
     args = {}
     strategy = exp.Strategy
