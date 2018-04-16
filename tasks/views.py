@@ -288,7 +288,7 @@ def final(request):
     for t in Task.objects.filter(Task_user__Name=request.user):
         if t.Checking == 'Решено':
             check += 1
-    exp = experiment.objects.get(Name=request.user)
+    exp = Experiment.objects.get(Name=request.user)
     exp.Timing = float('{:.3f}'.format(time.clock() - exp.StartTime))
     exp.save()
     args = {}
