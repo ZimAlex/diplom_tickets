@@ -199,7 +199,7 @@ def addVariant_cl(request, task_id):
             if not exp.Mistake:
                 exp.LastTask = str(task_id)
             exp.Mistake = True
-            if exp.MistakeList != '':
+            if exp.MistakeList != None:
                 li = exp.MistakeList.split(',')
                 li.append(str(id))
                 exp.MistakeList = ','.join(li)
