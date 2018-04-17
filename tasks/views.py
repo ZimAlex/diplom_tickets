@@ -14,7 +14,7 @@ import random
 
 def generate(request):
     r = random.randint(1,7)
-    r = 8
+    r = 1
     c = random.randint(0,1)
     c = 1
     if c == 1:

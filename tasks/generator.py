@@ -171,20 +171,26 @@ def generate():
 
                 n[5] = s1 - 1 - n[4] - n[3]
                 n[4] += 1
-                if n[4] == 10:
+                if n[4] == 10 and len(l5.items()) < 3:
                     n[3] += 1
                     n[5] = 9
-                    n[4] = s1 -n[3]-n[5]
+                    n[4] = s1 - n[3] - n[5]
+                    l5[k] = ''.join((str(i) for i in n))
+                    continue
             else:
                 n[3] += 1
-                if s1 < n[3]:
+                if s1 < n[3] and len(l6.items()) < 3:
                     n[2] += 1
                     n[3] = 0
                     n[4] = 0
                     n[5] = s1 + 1
+                    l6[k] = ''.join((str(i) for i in n))
+                    continue
                 else:
                     n[5] = s1 - n[3]
                     n[4] = 0
+                    l5[k] = ''.join((str(i) for i in n))
+                    continue
             l4[k] = ''.join((str(i) for i in n))
             continue
 
@@ -192,13 +198,15 @@ def generate():
             k = ''.join((str(i) for i in n))
             if s1 <= n[3] + n[4]:
                 n[3] += 1
-                if n[3] > s1:
+                if n[3] > s1 and len(l6.items()) < 3:
                     n[2] += 1
                     n[3] = n[4] = 0
                     n[5] = s1 + 1
                     if n[5] >= 10:
                         n[4] = n[5] - 9
                         n[5] = 9
+                    l6[k] = ''.join((str(i) for i in n))
+                    continue
                 else:
                     n[5] = s1 - n[3]
 
@@ -207,6 +215,7 @@ def generate():
                         n[5] = 9
                     else:
                         n[4] = 0
+
             else:
                 n[5] = n[5] - (s2 - s1) - 1
                 n[4] += 1
@@ -214,6 +223,9 @@ def generate():
                     n[3] += 1
                     n[5] = 9
                     n[4] = s1 - n[3] -n[5]
+                elif len(l4.items()) < 3:
+                    l4[k] = ''.join((str(i) for i in n))
+                    continue
             l5[k] = ''.join((str(i) for i in n))
             continue
 
@@ -229,19 +241,33 @@ def generate():
                         n[1] += 1
                         n[2] = 0
                     n[3] = 0
+                elif len(l5.items()) < 3:
+                    n[4] = 0
+                    n[5] = n[0] + n[1] + n[2] - n[3]
+                    if n[5] >= 10:
+                        n[4] = n[5] - 9
+                        n[5] = 9
+                    l5[k] = ''.join((str(i) for i in n))
+                    continue
+
                 n[4] = 0
                 n[5] = n[0] + n[1] + n[2] - n[3]
                 if n[5] >= 10:
                     n[4] = n[5] - 9
                     n[5] = 9
             elif 0 < s1 - n[3] - n[2] <= 9:
-                if n[4] + n[5] - n[3] <= 9:
+                if n[4] + n[5] - n[3] <= 9 and len(l4.items()) < 3:
                     n[4] += 1
                     n[5] = s1 - n[3] - n[4]
-                else:
+                    l4[k] = ''.join((str(i) for i in n))
+                    continue
+
+                elif len(l5.items()) < 3:
                     n[3] += 1
                     n[5] = 9
                     n[4] = s1 - n[3] - n[5]
+                    l5[k] = ''.join((str(i) for i in n))
+                    continue
             else:
                 n[2] += 1
                 if n[2] == 10:
