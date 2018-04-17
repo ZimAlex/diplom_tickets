@@ -8,7 +8,7 @@ from .models import Experiment, Task, Variant
 from . import generator
 from .forms import VariantForm
 from django.template.context_processors import csrf
-import datetime
+import time
 import random
 
 
@@ -49,7 +49,7 @@ def generate(request):
 
 def main(request):
     exp = Experiment.objects.get(Name=request.user)
-    exp.StartTime = datetime.datetime.now()
+    exp.StartTime = time.ctime()
     exp.save()
     args = {}
     args['strategy'] = exp.Strategy
@@ -100,7 +100,7 @@ def getTask(request, task_id):
     args['task'] = Task.objects.get(id=task_id)
     args['form'] = variant_form
     t = Task.objects.get(id=task_id)
-    t.StartTime = datetime.datetime.now()
+    t.StartTime = time.ctime()
     t.save()
     tList = exp.TaskList.split(',')
     if exp.Mistake:
@@ -144,10 +144,10 @@ def addVariant_cl(request, task_id):
                 t.Checking = 'Решено'
             else:
                 var.Check = Variant.Check
-            var.AnswerTime = datetime.datetime.now()
+            var.AnswerTime = time.ctime()
             # var.time = var.answerTime - t.startTime
             delta = var.AnswerTime - t.StartTime
-            var.Time = delta.seconds
+            var.Time = delta
             t.save()
             form.save()
     exp = Experiment.objects.get(Name=request.user)
@@ -238,7 +238,7 @@ def task(request, task_id):
     args['task'] = Task.objects.get(id=task_id)
     args['form'] = variant_form
     t = Task.objects.get(id=task_id)
-    t.StartTime = datetime.datetime.now()
+    t.StartTime = time.ctime()
     t.save()
     exp = Experiment.objects.get(Name=request.user)
     if exp.Info == 'Закрыто':
@@ -265,10 +265,10 @@ def addVariant(request, task_id):
                 t.Checking = 'Решено'
             else:
                 var.Check = Variant.Check
-            var.AnswerTime = datetime.datetime.now()
+            var.AnswerTime = time.ctime()
 
             # var.time = var.answerTime - t.StartTime
-            delta = var.AnswerTime.second - t.StartTime.second
+            delta = var.AnswerTime - t.StartTime
             var.Time = delta
             t.save()
             form.save()
@@ -292,8 +292,8 @@ def final(request):
         if t.Checking == 'Решено':
             check += 1
     exp = Experiment.objects.get(Name=request.user)
-    exp.EndTime = datetime.datetime.now()
-    delta = exp.EndTime.second - exp.StartTime.second
+    exp.EndTime = time.ctime()
+    delta = exp.EndTime - exp.StartTime
     exp.Timing = delta
     exp.save()
     args = {}
