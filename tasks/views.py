@@ -240,7 +240,7 @@ def task(request, task_id):
     t = Task.objects.get(id=task_id)
     t.StartTime = datetime.datetime.now()
     t.save()
-    exp = experiment.objects.get(Name=request.user)
+    exp = Experiment.objects.get(Name=request.user)
     if exp.Info == 'Закрыто':
         return render_to_response('tasks/task_cl_1.html', args)
     args['variants'] = Variant.objects.filter(variant_task=Task.objects.get(id=task_id))
@@ -280,7 +280,7 @@ def addVariant(request, task_id):
                 break
             if check == len(Task.objects.filter(Task_user__Name = request.user)):
                 return redirect('/tasks/finalPage')
-    exp = experiment.objects.get(Name=request.user)
+    exp = Experiment.objects.get(Name=request.user)
     strategy = exp.Strategy
     return redirect('/tasks/intro/%s/taskList' %strategy)
 
@@ -326,13 +326,13 @@ def statistics(request):
 
 def statistic(request, strategy):
     args ={}
-    args['experiment'] = experiment.objects.filter(Strategy=strategy)
+    args['experiment'] = Experiment.objects.filter(Strategy=strategy)
     args['strategy'] = strategy
     return render_to_response('tasks/statistic_list.html', args)
 
 def experiment(request, experiment_id):
     args = {}
-    args['tasks'] = Task.objects.filter(Task_user=experiment.objects.get(id=experiment_id))
+    args['tasks'] = Task.objects.filter(Task_user=Experiment.objects.get(id=experiment_id))
     return render_to_response('tasks/experiment.html', args)
 
 def variants(request, task_id):
