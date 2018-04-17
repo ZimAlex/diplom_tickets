@@ -243,7 +243,7 @@ def task(request, task_id):
     exp = Experiment.objects.get(Name=request.user)
     if exp.Info == 'Закрыто':
         return render_to_response('tasks/task_cl_1.html', args)
-    args['variants'] = Variant.objects.filter(variant_task=Task.objects.get(id=task_id))
+    args['variants'] = Variant.objects.filter(Variant_task=Task.objects.get(id=task_id))
     return render_to_response('tasks/task.html', args)
 
 
