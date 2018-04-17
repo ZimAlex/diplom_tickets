@@ -3,7 +3,7 @@
 
 from django.db import models
 
-import time
+import datetime
 
 
 class Experiment(models.Model):
@@ -13,9 +13,9 @@ class Experiment(models.Model):
     TaskList = models.CharField(max_length=9000, null=True, blank=True)
     MistakeList = models.CharField(max_length=9000)
     LastTask = models.CharField(max_length=100)
-    StartTime = models.FloatField(verbose_name='Время начала эксперимента', default=0, null=True, blank=True)
-    EndTime = models.FloatField(verbose_name='Время окончания эксперимента', default=0, null=True, blank=True)
-    Timing = models.FloatField(verbose_name='Время затраченное на эксперимент', default=0, null=True, blank=True)
+    StartTime = models.TimeField(default=datetime.datetime.now())
+    EndTime = models.TimeField(default=datetime.datetime.now())
+    Timing = models.TimeField(default=datetime.datetime.now())
     Replay = models.BooleanField()
     Mistake = models.BooleanField()
 
@@ -26,13 +26,13 @@ class Task(models.Model):
     Quest = models.CharField(max_length=6, verbose_name='Задание', null=True, blank=True)
     Answer = models.CharField(max_length=6, verbose_name='Правильный ответ', null=True, blank=True)
     Checking = models.CharField(max_length=100, default='Не счастливый', null=True, blank=True)
-    StartTime = models.FloatField(verbose_name='Время попадания на страницу', default=time.clock(), null=True, blank=True)
+    StartTime = models.TimeField(default=datetime.datetime.now())
 
 
 class Variant(models.Model):
     Variant_task = models.ForeignKey(Task, on_delete=models.CASCADE)
     Variant = models.CharField(max_length=6, verbose_name='Ваш Ответ ', default="", null=True, blank=True)
     Check = models.CharField(max_length=100, default='Не счастливый', null=True, blank=True)
-    AnswerTime = models.FloatField(verbose_name='Время ответа', default=time.clock(), null=True, blank=True)
-    Time = models.FloatField(verbose_name='Затраченное время', default=time.clock(), null=True, blank=True)
+    AnswerTime = models.TimeField(default=datetime.datetime.now())
+    Time = models.TimeField(default=datetime.datetime.now())
 # Create your models here.
