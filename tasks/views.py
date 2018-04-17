@@ -257,7 +257,7 @@ def addVariant(request, task_id):
             nums = str(var.Variant)
             s1 = int(nums[0]) + int(nums[1]) + int(nums[2])
             s2 = int(nums[3]) + int(nums[4]) + int(nums[5])
-            if s1 == s2 and var.variant != Task.objects.get(id=task_id).Answer:
+            if s1 == s2 and var.Variant != Task.objects.get(id=task_id).Answer:
                 var.Check = 'Счастливый, но не ближайший'
                 t.Checking = 'Счастливый, но не ближайший'
             elif var.Variant == Task.objects.get(id=task_id).Answer:
