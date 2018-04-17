@@ -15,7 +15,7 @@ class Experiment(models.Model):
     LastTask = models.CharField(max_length=100)
     StartTime = models.TimeField(default=datetime.datetime.now())
     EndTime = models.TimeField(default=datetime.datetime.now())
-    Timing = models.TimeField(default=datetime.datetime.now())
+    Timing = models.IntegerField()
     Replay = models.BooleanField()
     Mistake = models.BooleanField()
 
@@ -34,5 +34,5 @@ class Variant(models.Model):
     Variant = models.CharField(max_length=6, verbose_name='Ваш Ответ ', default="", null=True, blank=True)
     Check = models.CharField(max_length=100, default='Не счастливый', null=True, blank=True)
     AnswerTime = models.TimeField(default=datetime.datetime.now())
-    Time = models.TimeField(default=datetime.datetime.now())
+    Time = models.IntegerField()
 # Create your models here.

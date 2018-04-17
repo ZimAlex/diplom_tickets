@@ -269,7 +269,7 @@ def addVariant(request, task_id):
 
             # var.time = var.answerTime - t.StartTime
             delta = var.AnswerTime.second - t.StartTime.second
-            var.Time = delta.seconds
+            var.Time = delta
             t.save()
             form.save()
 
@@ -293,8 +293,8 @@ def final(request):
             check += 1
     exp = Experiment.objects.get(Name=request.user)
     exp.EndTime = datetime.datetime.now()
-    delta = exp.EndTime - exp.StartTime
-    exp.Timing = delta.seconds
+    delta = exp.EndTime.second - exp.StartTime.second
+    exp.Timing = delta
     exp.save()
     args = {}
     strategy = exp.Strategy
