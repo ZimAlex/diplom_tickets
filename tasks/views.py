@@ -266,6 +266,7 @@ def addVariant(request, task_id):
             else:
                 var.Check = Variant.Check
             var.AnswerTime = datetime.datetime.now()
+            form.save()
             # var.time = var.answerTime - t.StartTime
             delta = var.AnswerTime - t.StartTime
             var.Time = delta.seconds
