@@ -307,7 +307,7 @@ def final(request):
 
 def taskList(request):
     args = {}
-    exp = experiment.objects.get(Name=request.user)
+    exp = Experiment.objects.get(Name=request.user)
     strategy = exp.Strategy
     if strategy == 1:
         args['tasks'] = Task.objects.filter(Task_user__Name=request.user)
