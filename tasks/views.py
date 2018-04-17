@@ -265,7 +265,7 @@ def addVariant(request, task_id):
                 t.Checking = 'Решено'
             else:
                 var.Check = Variant.Check
-            var.AnswerTime = datetime.datetime()
+            var.AnswerTime = datetime.datetime.now()
             # var.time = var.answerTime - t.StartTime
             delta = var.AnswerTime - t.StartTime
             var.Time = delta.seconds
