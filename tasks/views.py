@@ -49,7 +49,7 @@ def generate(request):
 
 def main(request):
     exp = Experiment.objects.get(Name=request.user)
-    exp.StartTime = time.ctime()
+    exp.StartTime = time.time()
     exp.save()
     args = {}
     args['strategy'] = exp.Strategy
@@ -100,7 +100,7 @@ def getTask(request, task_id):
     args['task'] = Task.objects.get(id=task_id)
     args['form'] = variant_form
     t = Task.objects.get(id=task_id)
-    t.StartTime = time.ctime()
+    t.StartTime = time.time()
     t.save()
     tList = exp.TaskList.split(',')
     if exp.Mistake:
@@ -144,7 +144,7 @@ def addVariant_cl(request, task_id):
                 t.Checking = 'Решено'
             else:
                 var.Check = Variant.Check
-            var.AnswerTime = time.ctime()
+            var.AnswerTime = time.time()
             # var.time = var.answerTime - t.startTime
             delta = var.AnswerTime - t.StartTime
             var.Time = delta
@@ -238,7 +238,7 @@ def task(request, task_id):
     args['task'] = Task.objects.get(id=task_id)
     args['form'] = variant_form
     t = Task.objects.get(id=task_id)
-    t.StartTime = time.ctime()
+    t.StartTime = time.time()
     t.save()
     exp = Experiment.objects.get(Name=request.user)
     if exp.Info == 'Закрыто':
@@ -265,7 +265,7 @@ def addVariant(request, task_id):
                 t.Checking = 'Решено'
             else:
                 var.Check = Variant.Check
-            var.AnswerTime = time.ctime()
+            var.AnswerTime = time.time()
 
             # var.time = var.answerTime - t.StartTime
             delta = var.AnswerTime - t.StartTime
@@ -292,7 +292,7 @@ def final(request):
         if t.Checking == 'Решено':
             check += 1
     exp = Experiment.objects.get(Name=request.user)
-    exp.EndTime = time.ctime()
+    exp.EndTime = time.time()
     delta = exp.EndTime - exp.StartTime
     exp.Timing = delta
     exp.save()
