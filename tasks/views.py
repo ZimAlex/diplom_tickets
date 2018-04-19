@@ -87,7 +87,7 @@ def getTask(request, task_id):
         if exp.Replay and not exp.Mistake:
             for id in tl:
                 task = Task.objects.get(id=id)
-                if task.Checking != 'Решено' and task.checiking != 'Счастливый, но не ближайший':
+                if task.Checking != 'Решено' and task.checking != 'Счастливый, но не ближайший':
                     ml.append(id)
             exp.MistakeList = ','.join(ml)
             exp.Mistake = True
