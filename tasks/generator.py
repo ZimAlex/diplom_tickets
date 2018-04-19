@@ -245,11 +245,11 @@ def generate():
                     continue
                 n[4] = 0
                 n[5] = n[0] + n[1] + n[2] - n[3]
-                l5[k] = ''.join((str(i) for i in n))
-                continue
                 if n[5] >= 10:
                     n[4] = n[5] - 9
                     n[5] = 9
+                l5[k] = ''.join((str(i) for i in n))
+                continue
             elif 0 < s1 - n[3] - n[2] <= 9:
                 if n[4] + n[5] - n[3] <= 9 and len(l4.items()) < 3:
                     n[4] += 1
