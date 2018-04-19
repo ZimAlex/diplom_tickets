@@ -14,14 +14,16 @@ import random
 
 def generate(request):
     r = random.randint(1,7)
-    r = 7
+    r = 1
     c = random.randint(0,1)
     c = 1
+    if r == 7 or r == 8:
+        c = 0
     if c == 1:
         inf = 'Открыто'
     else:
         inf = 'Закрыто'
-    # r = 7
+
     if r == 7:
         repl = True
     else:
@@ -274,14 +276,22 @@ def addVariant(request, task_id):
             form.save()
 
         check = 0
-        for task in Task.objects.filter(Task_user__Name = request.user):
-            if task.Checking == 'Решено':
-                check += 1
+        exp = Experiment.objects.get(Name=request.user)
+        for task in Task.objects.filter(Task_user__Name=request.user):
+
+            if exp.info == "Открыто":
+                if task.Checking == 'Решено':
+                    check += 1
+                else:
+                    break
+                if check == len(Task.objects.filter(Task_user__Name = request.user)):
+                    return redirect('/tasks/finalPage')
             else:
-                break
-            if check == len(Task.objects.filter(Task_user__Name = request.user)):
+                try:
+                    v = Variant.objects.get(Varant_task=task)
+                except:
+                    break
                 return redirect('/tasks/finalPage')
-    exp = Experiment.objects.get(Name=request.user)
     strategy = exp.Strategy
     return redirect('/tasks/intro/%s/taskList' %strategy)
 

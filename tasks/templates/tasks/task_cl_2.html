@@ -5,7 +5,7 @@
 {% block content%}
 
     <h2 class="text-info">{{task.Quest}}</h2>
-    <h2 class="text-info">Уровень: {{task.Level}}</h2>
+
     <form action="variant/{{task.id}}" method="post">
         {% csrf_token %}
         {{ form }}
