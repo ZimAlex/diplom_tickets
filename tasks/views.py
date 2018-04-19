@@ -14,7 +14,7 @@ import random
 
 def generate(request):
     r = random.randint(1,7)
-    r = 1
+    r = 3
     c = random.randint(0,1)
     c = 1
     if r == 7 or r == 8:
