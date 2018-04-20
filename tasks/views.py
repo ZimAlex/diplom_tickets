@@ -264,7 +264,7 @@ def addVariant(request, task_id):
                 args = {}
                 args['error'] = 'Введите корректный номер билета (6 цифр)'
                 args['task_id'] = "/tasks/task/" + str(task_id)
-                return render("tasks/error.html", args)
+                return render_to_response("tasks/error.html", args)
             if s1 == s2 and var.Variant != Task.objects.get(id=task_id).Answer:
                 var.Check = 'Счастливый, но не ближайший'
                 t.Checking = 'Счастливый, но не ближайший'
