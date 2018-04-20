@@ -279,7 +279,7 @@ def addVariant(request, task_id):
         exp = Experiment.objects.get(Name=request.user)
         for task in Task.objects.filter(Task_user__Name=request.user):
 
-            if exp.info == "Открыто":
+            if exp.Info == "Открыто":
                 if task.Checking == 'Решено':
                     check += 1
                 else:
@@ -288,7 +288,7 @@ def addVariant(request, task_id):
                     return redirect('/tasks/finalPage')
             else:
                 try:
-                    v = Variant.objects.get(Varant_task=task)
+                    Variant.objects.get(Varant_task=task)
                 except:
                     break
                 return redirect('/tasks/finalPage')
