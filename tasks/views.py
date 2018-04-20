@@ -263,7 +263,7 @@ def addVariant(request, task_id):
             except IndexError:
                 args = {}
                 args['error'] = 'Введите корректный номер билета (6 цифр)'
-                args['task_id'] = "/tasks/task/" + str(task_id)
+                args['task_id'] = "/tasks/" + str(task_id)
                 return render_to_response("tasks/error.html", args)
             if s1 == s2 and var.Variant != Task.objects.get(id=task_id).Answer:
                 var.Check = 'Счастливый, но не ближайший'
