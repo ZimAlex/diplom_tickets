@@ -140,7 +140,7 @@ def generate():
     l4 = {}
     l5 = {}
     l6 = {}
-    for i in range(10000000):
+    for i in range(1000000000):
         n = rand()
         s1 = n[0] + n[1] + n[2]
         s2 = n[3] + n[4] + n[5]
