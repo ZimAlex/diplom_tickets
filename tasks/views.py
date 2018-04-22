@@ -134,8 +134,14 @@ def addVariant_cl(request, task_id):
                 return redirect('/tasks/task/%s' % task_id)
             var.Variant_task = Task.objects.get(id=task_id)
             nums = str(var.Variant)
-            s1 = int(nums[0]) + int(nums[1]) + int(nums[2])
-            s2 = int(nums[3]) + int(nums[4]) + int(nums[5])
+            try:
+                s1 = int(nums[0]) + int(nums[1]) + int(nums[2])
+                s2 = int(nums[3]) + int(nums[4]) + int(nums[5])
+            except IndexError:
+                args = {}
+                args['error'] = 'Введите корректный номер билета (6 цифр)'
+                args['task_id'] = "/tasks/" + str(task_id)
+                return render_to_response("tasks/error.html", args)
 
 
             if s1 == s2 and var.Variant != Task.objects.get(id=task_id).Answer:
@@ -290,13 +296,12 @@ def addVariant(request, task_id):
                     check += 1
                 else:
                     break
-                if check == len(Task.objects.filter(Task_user__Name = request.user)):
-                    return redirect('/tasks/finalPage')
             else:
-                try:
-                    Variant.objects.get(Varant_task=task)
-                except:
+                if Variant.objects.filter(Variant_task=task).count > 0:
+                    check += 1
+                else:
                     break
+            if check == len(Task.objects.filter(Task_user__Name=request.user)):
                 return redirect('/tasks/finalPage')
     strategy = exp.Strategy
     return redirect('/tasks/intro/%s/taskList' %strategy)
