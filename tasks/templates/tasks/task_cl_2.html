@@ -5,7 +5,7 @@
 {% block content%}
 
     <h2 class="text-info">{{task.Quest}}</h2>
-    <h3 align="center">Напишите следующий счастливый билет</h3>
+    <h4 align="left">Напишите следующий счастливый билет</h4>
     <form action="variant/{{task.id}}" method="post">
 
         {% csrf_token %}
