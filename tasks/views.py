@@ -13,7 +13,7 @@ import random
 
 
 def generate(request):
-    r = random.randint(1,7)
+    r = random.randint(1,8)
     # r = 1
     c = random.randint(0,1)
     # c = 0
