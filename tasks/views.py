@@ -297,7 +297,7 @@ def addVariant(request, task_id):
                 else:
                     break
             else:
-                if Variant.objects.filter(Variant_task=task).count > 0:
+                if Variant.objects.filter(Variant_task=task).__len__ > 0:
                     check += 1
                 else:
                     break
