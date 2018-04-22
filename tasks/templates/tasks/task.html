@@ -10,7 +10,9 @@
     {% for variant in variants %}
     <h4>{{variant.Variant}}  Время: <em>{{variant.Time}}</em> секунд</h4>
     {% endfor %}
+    <h3 align="center">Напишите следующий счастливый билет</h3>
     <form action="addvariant/{{task.id}}" method="post">
+
         {% csrf_token %}
         {{ form }}
         <input type="submit" class="btn btn-primary btn-lg" value="Подтвердить">
