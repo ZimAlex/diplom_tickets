@@ -155,7 +155,7 @@ def addVariant_cl(request, task_id):
             var.AnswerTime = time.time()
             # var.time = var.answerTime - t.startTime
             delta = var.AnswerTime - t.StartTime
-            var.Time = delta
+            var.Time = round(delta, 2)
             t.save()
             form.save()
     exp = Experiment.objects.get(Name=request.user)
@@ -283,7 +283,7 @@ def addVariant(request, task_id):
 
             # var.time = var.answerTime - t.StartTime
             delta = var.AnswerTime - t.StartTime
-            var.Time = delta
+            var.Time = round(delta, 2)
             t.save()
             form.save()
 
@@ -315,7 +315,7 @@ def final(request):
     exp = Experiment.objects.get(Name=request.user)
     exp.EndTime = time.time()
     delta = exp.EndTime - exp.StartTime
-    exp.Timing = delta
+    exp.Timing = round(delta, 2)
     exp.save()
     args = {}
     strategy = exp.Strategy
