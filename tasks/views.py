@@ -293,6 +293,7 @@ def addVariant(request, task_id):
             # var.time = var.answerTime - t.StartTime
             delta = var.AnswerTime - t.StartTime
             var.Time = round(delta, 2)
+            t.Ans_number += 1
             t.save()
             form.save()
 
@@ -348,6 +349,7 @@ def taskList(request):
         args['tasks'] = Task.objects.filter(Task_user__Name=request.user).order_by('?')
     args['strategy'] = strategy
     if exp.Info == 'Закрыто':
+
         return render_to_response('tasks/tasks_cl.html', args)
     return render_to_response('tasks/tasks.html', args)
 

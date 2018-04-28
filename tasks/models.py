@@ -27,7 +27,7 @@ class Task(models.Model):
     Answer = models.CharField(max_length=6, verbose_name='Правильный ответ', null=True, blank=True)
     Checking = models.CharField(max_length=100, default='Не счастливый', null=True, blank=True)
     StartTime = models.FloatField(default=0.0)
-
+    Ans_number = models.IntegerField(default=0)
 
 class Variant(models.Model):
     Variant_task = models.ForeignKey(Task, on_delete=models.CASCADE)
