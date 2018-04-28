@@ -141,6 +141,11 @@ def addVariant_cl(request, task_id):
                 args['error'] = 'Введите корректный номер билета (6 цифр)'
                 args['task_id'] = "/tasks/" + str(task_id)
                 return render_to_response("tasks/error.html", args)
+            except ValueError:
+                args = {}
+                args['error'] = 'Введите номер следующего счастливого билета'
+                args['task_id'] = "/tasks/" + str(task_id)
+                return render_to_response("tasks/error.html", args)
 
 
             if s1 == s2 and var.Variant != Task.objects.get(id=task_id).Answer:
@@ -268,6 +273,11 @@ def addVariant(request, task_id):
             except IndexError:
                 args = {}
                 args['error'] = 'Введите корректный номер билета (6 цифр)'
+                args['task_id'] = "/tasks/" + str(task_id)
+                return render_to_response("tasks/error.html", args)
+            except ValueError:
+                args = {}
+                args['error'] = 'Введите номер следующего счастливого билета'
                 args['task_id'] = "/tasks/" + str(task_id)
                 return render_to_response("tasks/error.html", args)
             if s1 == s2 and var.Variant != Task.objects.get(id=task_id).Answer:
