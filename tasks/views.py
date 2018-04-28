@@ -130,8 +130,7 @@ def addVariant_cl(request, task_id):
         if form.is_valid():
             t = Task.objects.get(id=task_id)
             var = form.save(commit=False)
-            if not isint(var.Variant) or len(var.Variant) != 6:
-                return redirect('/tasks/task/%s' % task_id)
+
             var.Variant_task = Task.objects.get(id=task_id)
             nums = str(var.Variant)
             try:
