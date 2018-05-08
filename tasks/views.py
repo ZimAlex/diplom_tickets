@@ -366,6 +366,7 @@ def statistic(request, strategy):
 def experiment(request, experiment_id):
     args = {}
     args['tasks'] = Task.objects.filter(Task_user=Experiment.objects.get(id=experiment_id))
+    args['experiment'] = Experiment.objects.get(id=experiment_id)
     return render_to_response('tasks/experiment.html', args)
 
 def variants(request, task_id):
