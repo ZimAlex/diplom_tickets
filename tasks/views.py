@@ -160,6 +160,7 @@ def addVariant_cl(request, task_id):
             # var.time = var.answerTime - t.startTime
             delta = var.AnswerTime - t.StartTime
             var.Time = round(delta, 2)
+            t.Ans_number += 1
             t.save()
             form.save()
     exp = Experiment.objects.get(Name=request.user)
