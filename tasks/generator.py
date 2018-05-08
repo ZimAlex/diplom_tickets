@@ -241,6 +241,9 @@ def generate():
                         n[1] += 1
                         n[2] = 0
                     n[3] = 0
+                    if s1 > 9:
+                        n[4] = s1-9
+                        n[5] = 9
                     l6[k] = ''.join((str(i) for i in n))
                     continue
                 if len(l5.items()) < 3:
@@ -272,7 +275,7 @@ def generate():
                     n[2] = 9
                 n[3] = 0
                 if s1 - 9 > 0:
-                   n[4] = s1 - 8
+                   n[4] = s1 - 9
                    n[5] = 9
                 else:
                     n[4] = 0
