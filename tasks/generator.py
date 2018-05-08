@@ -241,8 +241,12 @@ def generate():
                         n[1] += 1
                         n[2] = 0
                     n[3] = 0
-                    if s1 > 9:
+                    if 18 > s1 > 9:
                         n[4] = s1-9
+                        n[5] = 9
+                    elif s1 > 18:
+                        n[3] = s1 - 18
+                        n[4] = 9
                         n[5] = 9
                     l6[k] = ''.join((str(i) for i in n))
                     continue
