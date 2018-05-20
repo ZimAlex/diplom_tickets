@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from . import views
+from django.views.generic.base import RedirectView
 
 # from .views import TaskList
 
@@ -24,6 +25,6 @@ urlpatterns = [
     url(r'^statistic/$', views.statistics),
     url(r'^statistic/(?P<strategy>\d+)/$', views.statistic),
     url(r'experiment/(?P<experiment_id>\d+)$', views.experiment),
-    url(r'experiment/(?P<task_id>\d+)/var/$', views.variants)
-
+    url(r'experiment/(?P<task_id>\d+)/var/$', views.variants),
+    url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon/favicon.ico'))
 ]
