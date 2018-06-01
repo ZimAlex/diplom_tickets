@@ -375,10 +375,10 @@ def experiment(request, experiment_id):
             full += 1
             if v.Check == 'Решено':
                 count_g += 1
-            elif v.Check == 'Не решено':
-                count_b += 1
-            else:
+            elif v.Check == 'Счастливый но не ближайший':
                 count_nb += 1
+            else:
+                count_b += 1
     g_pct = count_g/full
     b_pct = count_b/full
     nb_pct = count_nb/full
