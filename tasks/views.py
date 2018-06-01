@@ -375,7 +375,7 @@ def experiment(request, experiment_id):
             full += 1
             if v.Check == 'Решено':
                 count_g += 1
-            elif v.Check == 'Счастливый но не ближайший':
+            elif v.Check == 'Счастливый, но не ближайший':
                 count_nb += 1
             else:
                 count_b += 1
