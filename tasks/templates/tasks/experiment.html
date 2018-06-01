@@ -6,6 +6,11 @@
 {% block content %}
 <table border="1px" solid grey>
     <h3 align="center">Тип теста: {{experiment.Info}}</h3>
+    <text align="center">
+        Процент решенных: {{g_pct}}
+        Процент нерешенных: {{b_pct}}
+        Процент счастливых но не ближайших {{nb_pct}}
+    </text>
     <tr>
         <th>Задание</th>
         <th>Уровень</th>

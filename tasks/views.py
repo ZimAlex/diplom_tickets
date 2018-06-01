@@ -365,9 +365,29 @@ def statistic(request, strategy):
     return render_to_response('tasks/statistic_list.html', args)
 
 def experiment(request, experiment_id):
+    tasks = Task.objects.filter(Task_user=Experiment.objects.get(id=experiment_id))
+    count_g = 0 # посдсчет решенных
+    count_b = 0 # подсчет не решенных
+    count_nb = 0 # подсчет  счастливых но не ближайших
+    full = 0
+    for t in tasks:
+        for v in Variant.objects.filter(Variant_task = t):
+            full += 1
+            if v.Check == 'Решено':
+                count_g += 1
+            elif v.Check == 'Не решено':
+                count_b += 1
+            else:
+                count_nb += 1
+    g_pct = count_g/full
+    b_pct = count_b/full
+    nb_pct = count_nb/full
     args = {}
-    args['tasks'] = Task.objects.filter(Task_user=Experiment.objects.get(id=experiment_id))
+    args['tasks'] = tasks
     args['experiment'] = Experiment.objects.get(id=experiment_id)
+    args['g_pct'] = g_pct
+    args['b_pct'] = b_pct
+    args['nb_pct'] = nb_pct
     return render_to_response('tasks/experiment.html', args)
 
 def variants(request, task_id):
