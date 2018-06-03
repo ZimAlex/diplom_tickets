@@ -14,7 +14,7 @@ import random
 
 def generate(request):
     r = random.randint(1,8)
-    r = 7
+    # r = 7
     c = random.randint(0,1)
     # c = 0
     if r == 7 or r == 8:
@@ -388,6 +388,7 @@ def experiment(request, experiment_id):
     args['g_pct'] = g_pct
     args['b_pct'] = b_pct
     args['nb_pct'] = nb_pct
+
     return render_to_response('tasks/experiment.html', args)
 
 def variants(request, task_id):
