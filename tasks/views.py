@@ -14,7 +14,7 @@ import random
 
 def generate(request):
     r = random.randint(1,8)
-    # r = 7
+    r = 7
     c = random.randint(0,1)
     # c = 0
     if r == 7 or r == 8:
@@ -379,9 +379,9 @@ def experiment(request, experiment_id):
                 count_nb += 1
             else:
                 count_b += 1
-    g_pct = count_g/full
-    b_pct = count_b/full
-    nb_pct = count_nb/full
+    g_pct = count_g/full * 100
+    b_pct = count_b/full * 100
+    nb_pct = count_nb/full * 100
     args = {}
     args['tasks'] = tasks
     args['experiment'] = Experiment.objects.get(id=experiment_id)
