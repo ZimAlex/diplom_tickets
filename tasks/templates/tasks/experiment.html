@@ -7,15 +7,20 @@
 <table border="1px" solid grey>
     <h3 align="center">Тип теста: {{experiment.Info}}</h3>
     <text align="center">
-        Процент решенных: {{g_pct}} % /n
-        Процент нерешенных: {{b_pct}} /n
-        Процент счастливых но не ближайших {{nb_pct}}
+        Процент решенных: {{g_pct}} <br>
+        Процент нерешенных: {{b_pct}} <br>
+        Процент счастливых но не ближайших {{nb_pct}} <br>
+        Медиана времени ответа: {{median_all}} <br>
+        Среднее время ответа: {{avg_task_time}} <br>
+
     </text>
     <tr>
         <th>Задание</th>
         <th>Уровень</th>
         <th>Статус</th>
         <th>Кол-во вариантов</th>
+        <th>Среднее время решения задания</th>
+        <th>Разница между след.</th>
 
         <th>Варианты</th>
     </tr>
@@ -25,6 +30,8 @@
             <td align="center">{{task.Level}}</td>
             <td align="center">{{task.Checking}}</td>
             <td align="center">{{task.Ans_number}}</td>
+            <td align="center">{{task.Time}}</td>
+            <td align="center">{{task.Diff}}</td>
             <td align="center"><a href="{{task.id}}/var/"> Варианты </a></td>
 
         </tr>

@@ -28,6 +28,8 @@ class Task(models.Model):
     Checking = models.CharField(max_length=100, default='Не счастливый', null=True, blank=True)
     StartTime = models.FloatField(default=0.0)
     Ans_number = models.IntegerField(default=0)
+    Diff = models.FloatField(default=0.0)
+    Time = models.FloatField(default=0.0)
 
 class Variant(models.Model):
     Variant_task = models.ForeignKey(Task, on_delete=models.CASCADE)

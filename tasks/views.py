@@ -3,7 +3,8 @@
 
 from django.shortcuts import render_to_response, redirect, render
 
-
+from numpy import median as med
+from numpy import average as avg
 from .models import Experiment, Task, Variant
 from . import generator
 from .forms import VariantForm
@@ -365,30 +366,74 @@ def statistic(request, strategy):
     return render_to_response('tasks/statistic_list.html', args)
 
 def experiment(request, experiment_id):
-    tasks = Task.objects.filter(Task_user=Experiment.objects.get(id=experiment_id))
+    exp = Experiment.objects.get(id=experiment_id)
+    tasks = Task.objects.filter(Task_user=exp)
     count_g = 0 # посдсчет решенных
     count_b = 0 # подсчет не решенных
     count_nb = 0 # подсчет  счастливых но не ближайших
     full = 0
-    for t in tasks:
-        for v in Variant.objects.filter(Variant_task = t):
-            full += 1
-            if v.Check == 'Решено':
-                count_g += 1
-            elif v.Check == 'Счастливый, но не ближайший':
-                count_nb += 1
+    times = []
+    time_of_task = []
+    time_of_task_avg = []
+    diff_of_time = [0]
+    if exp.strategy in (1,2,3):
+        for t in tasks:
+            count = 0
+            tm = 0.0
+            for v in Variant.objects.filter(Variant_task = t):
+                full += 1
+                count += 1
+                times.append(v.AnswerTime)
+                tm += v.AnswerTime
+                if v.Check == 'Решено':
+                    count_g += 1
+                elif v.Check == 'Счастливый, но не ближайший':
+                    count_nb += 1
+                else:
+                    count_b += 1
+            time_of_task.append(tm/count)
+            t.Time = tm
+            t.save()
+    else:
+        i = 1
+        for t in tasks:
+            count = 0
+            tm = 0.0
+            for v in Variant.objects.filter(Variant_task=t):
+                full += 1
+                count += 1
+                times.append(v.AnswerTime)
+                tm += v.AnswerTime
+                if v.Check == 'Решено':
+                    count_g += 1
+                elif v.Check == 'Счастливый, но не ближайший':
+                    count_nb += 1
+                else:
+                    count_b += 1
+            if exp.strategy == 7:
+                time_of_task.append(tm / count)
             else:
-                count_b += 1
+                time_of_task.append(tm)
+            if len(time_of_task) > 1:
+                diff_of_time.append(abs(tm-time_of_task[i-1]))
+                t.Diff = abs(tm-time_of_task[i])
+                i += 1
+            t.Time = tm
+            t.save()
     g_pct = count_g/full * 100
     b_pct = count_b/full * 100
     nb_pct = count_nb/full * 100
+    median_all = med(times)
     args = {}
     args['tasks'] = tasks
     args['experiment'] = Experiment.objects.get(id=experiment_id)
     args['g_pct'] = g_pct
     args['b_pct'] = b_pct
     args['nb_pct'] = nb_pct
-
+    args['avg_task_time'] = avg(time_of_task)
+    args['median_all'] = median_all #медиана времени ответа
+    args['avg_of_diff'] = diff_of_time/(len(diff_of_time)-1)
+    args['median_of_diff'] = med(diff_of_time)
     return render_to_response('tasks/experiment.html', args)
 
 def variants(request, task_id):
