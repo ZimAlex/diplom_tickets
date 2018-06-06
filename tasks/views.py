@@ -377,6 +377,7 @@ def experiment(request, experiment_id):
     time_of_task_avg = []
     diff_of_time = [0]
     if exp.Strategy in (1,2,3):
+        i = 1
         for t in tasks:
             count = 0
             tm = 0.0
@@ -392,6 +393,10 @@ def experiment(request, experiment_id):
                 else:
                     count_b += 1
             time_of_task.append(tm/count)
+            if len(time_of_task) > 1:
+                diff_of_time.append(abs(tm-time_of_task[i-1]))
+                t.Diff = abs(tm-time_of_task[i])
+                i += 1
             t.Time = tm
             t.save()
     else:
