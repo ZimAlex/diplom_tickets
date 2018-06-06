@@ -384,8 +384,8 @@ def experiment(request, experiment_id):
             for v in Variant.objects.filter(Variant_task = t):
                 full += 1
                 count += 1
-                times.append(v.AnswerTime)
-                tm += v.AnswerTime
+                times.append(v.Time)
+                tm += v.Time
                 if v.Check == 'Решено':
                     count_g += 1
                 elif v.Check == 'Счастливый, но не ближайший':
@@ -407,8 +407,8 @@ def experiment(request, experiment_id):
             for v in Variant.objects.filter(Variant_task=t):
                 full += 1
                 count += 1
-                times.append(v.AnswerTime)
-                tm += v.AnswerTime
+                times.append(v.Time)
+                tm += v.Time
                 if v.Check == 'Решено':
                     count_g += 1
                 elif v.Check == 'Счастливый, но не ближайший':
