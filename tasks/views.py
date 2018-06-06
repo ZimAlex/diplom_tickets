@@ -415,8 +415,8 @@ def experiment(request, experiment_id):
                     count_nb += 1
                 else:
                     count_b += 1
-            if exp.Strategy == 7:
-                time_of_task.append(tm / count)
+            if exp.Strategy == 7 and count!=0:
+                time_of_task.append(tm/count)
             else:
                 time_of_task.append(tm)
             if len(time_of_task) > 1:
