@@ -399,7 +399,7 @@ def experiment(request, experiment_id):
                 i += 1
             t.Time = tm
             t.save()
-    else:
+    elif exp.Strategy in (4,5,6,7,8):
         i = 1
         for t in tasks:
             count = 0
