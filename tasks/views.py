@@ -419,7 +419,7 @@ def experiment(request, experiment_id):
                 time_of_task.append(tm / count)
             else:
                 time_of_task.append(tm)
-            if len(time_of_task) > 1:
+            if len(time_of_task) > 0:
                 diff_of_time.append(abs(tm-time_of_task[i-1]))
                 t.Diff = abs(tm-time_of_task[i])
                 i += 1
