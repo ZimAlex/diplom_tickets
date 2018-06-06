@@ -63,7 +63,7 @@ def createList(request):
     l = []
     exp = Experiment.objects.get(Name=request.user)
     strategy = exp.Strategy
-    for t in Task.objects.filter(Task_user=exp):
+    for t in Task.objects.filter(Task_user=Experiment.objects.get(Name=request.user)):
         l.append(str(t.id))
     if strategy == 5:
         l = list(l.reverse())
