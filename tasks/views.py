@@ -415,17 +415,19 @@ def experiment(request, experiment_id):
                     count_nb += 1
                 else:
                     count_b += 1
-            if exp.Strategy == 7 and count !=0 :
+            if exp.Strategy == 7 and count != 0:
                 time_of_task.append(tm/count)
-            elif exp.Strategy == 7 and count ==0:
+                t.Time = tm/count
+            elif exp.Strategy == 7 and count == 0:
                 time_of_task.append(0.0)
             else:
                 time_of_task.append(tm)
+                t.Time = tm
             if len(time_of_task) > 1:
                 diff_of_time.append(abs(tm-time_of_task[i-1]))
                 t.Diff = abs(tm - time_of_task[i-1])
                 i += 1
-            t.Time = tm
+
             t.save()
     g_pct = count_g/full * 100
     b_pct = count_b/full * 100
