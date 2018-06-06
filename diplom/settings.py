@@ -25,7 +25,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "diplom.settings")
 SECRET_KEY = 'c!&p#a!h2%bmo(wc70jca2qxj2$cjf4w6nws(y8r3gl0)&x4z8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['zelion.pythonanywhere.com']
 
