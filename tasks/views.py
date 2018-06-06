@@ -66,9 +66,9 @@ def createList(request):
     for t in Task.objects.filter(Task_user__Name=request.user):
         l.append(str(t.id))
     if strategy == 5:
-        l = l.reverse()
+        l = list(l.reverse())
     elif strategy == 6:
-        l = random.shuffle(l)
+        l = list(random.shuffle(l))
     exp = Experiment.objects.get(Name=request.user)
     exp.TaskList = ','.join(l)
     exp.save(force_insert=False)
