@@ -432,7 +432,7 @@ def experiment(request, experiment_id):
     args['nb_pct'] = nb_pct
     args['avg_task_time'] = avg(time_of_task)
     args['median_all'] = median_all #медиана времени ответа
-    args['avg_of_diff'] = diff_of_time/(len(diff_of_time)-1)
+    args['avg_of_diff'] = sum(diff_of_time)/(len(diff_of_time)-1)
     args['median_of_diff'] = med(diff_of_time)
     return render_to_response('tasks/experiment.html', args)
 
