@@ -66,7 +66,7 @@ def createList(request):
     for t in Task.objects.filter(Task_user=Experiment.objects.get(Name=request.user)):
         l.append(str(t.id))
     if strategy == 5:
-        l = list(l.reverse())
+        l.reverse()
     elif strategy == 6:
         random.shuffle(l)
     exp = Experiment.objects.get(Name=request.user)
@@ -394,8 +394,8 @@ def experiment(request, experiment_id):
                     count_b += 1
             time_of_task.append(tm/count)
             if len(time_of_task) > 1:
-                diff_of_time.append(abs(tm-time_of_task[i-1]))
-                t.Diff = abs(tm-time_of_task[i-1])
+                diff_of_time.append(abs(time_of_task[i]-time_of_task[i-1]))
+                t.Diff = abs(time_of_task[i]-time_of_task[i-1])
                 i += 1
             t.Time = tm
             t.save()
@@ -424,8 +424,8 @@ def experiment(request, experiment_id):
                 time_of_task.append(tm)
                 t.Time = tm
             if len(time_of_task) > 1:
-                diff_of_time.append(abs(tm-time_of_task[i-1]))
-                t.Diff = abs(tm - time_of_task[i-1])
+                diff_of_time.append(abs(time_of_task[i]-time_of_task[i-1]))
+                t.Diff = abs(time_of_task[i] - time_of_task[i-1])
                 i += 1
 
             t.save()
