@@ -399,7 +399,7 @@ def experiment(request, experiment_id):
                 i += 1
             t.Time = tm
             t.save()
-    elif exp.Strategy in (4,5,6,7,8):
+    elif exp.Strategy in (4,5,7,8):
         i = 1
         for t in tasks:
             count = 0
@@ -429,6 +429,7 @@ def experiment(request, experiment_id):
                 i += 1
 
             t.save()
+    Define_lev(t.id)
     g_pct = count_g/full * 100
     b_pct = count_b/full * 100
     nb_pct = count_nb/full * 100
@@ -443,6 +444,7 @@ def experiment(request, experiment_id):
     args['median_all'] = median_all #медиана времени ответа
     args['avg_of_diff'] = sum(diff_of_time)/(len(diff_of_time)-1)
     args['median_of_diff'] = med(diff_of_time)
+
     return render_to_response('tasks/experiment.html', args)
 
 def variants(request, task_id):
@@ -452,3 +454,17 @@ def variants(request, task_id):
     return render_to_response('tasks/variants.html', args)
 
 # Create your views here.
+
+def Define_lev(task_id):
+    t = Task.objects.get(id=task_id)
+    q = t.Quest
+    a = t.Answer
+    s1q = int(q[0]) + int(q[1]) + int(q[2])
+    s2q = int(q[3]) + int(q[4]) + int(q[5])
+    s1a = int(a[0]) + int(a[1]) + int(a[2])
+    s2a = int(a[3]) + int(a[4]) + int(a[5])
+    if s1q < s2q and s2q > s2a and s1q > s1a:
+        t.sub_lev = 1
+    t.save
+
+

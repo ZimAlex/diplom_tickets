@@ -30,6 +30,7 @@ class Task(models.Model):
     Ans_number = models.IntegerField(default=0)
     Diff = models.FloatField(default=0.0)
     Time = models.FloatField(default=0.0)
+    sub_lev = models.IntegerField(default=0)
 
 class Variant(models.Model):
     Variant_task = models.ForeignKey(Task, on_delete=models.CASCADE)
