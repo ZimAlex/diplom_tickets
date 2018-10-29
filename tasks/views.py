@@ -232,10 +232,9 @@ def addVariant_cl(request, task_id):
                 if tl.index(exp.LastTask) == len(tl)-1:
                     return redirect('/tasks/finalPage')
                 return redirect('/tasks/task/%s' % tl[tl.index(exp.LastTask)+1])
-            else:
-                if tl.index(task_id) == len(tl)-1:
-                    return redirect('/tasks/finalPage')
 
+    if tl.index(task_id) == len(tl)-1:
+        return redirect('/tasks/finalPage')
 
     tl = exp.TaskList.split(',')
 
