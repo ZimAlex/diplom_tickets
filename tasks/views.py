@@ -15,7 +15,7 @@ import random
 
 def generate(request):
     r = random.randint(1,8)
-    r = 6
+    r = 5
     c = random.randint(0,1)
     # c = 0
     if r == 7 or r == 8:
@@ -85,19 +85,19 @@ def getTask(request, task_id):
         tl = exp.TaskList.split(',')
     ml = []
 
-
-    if  exp.Strategy != 8 and tl.index(task_id) == len(tl)-1:
-        if exp.Replay and not exp.Mistake:
-            for id in tl:
-                task = Task.objects.get(id=id)
-                if task.Checking != 'Решено':
-                    ml.append(id)
-            exp.MistakeList = ','.join(ml)
-            exp.Mistake = True
-            exp.save()
-            return redirect('/tasks/mistakes/%s' % ml[0])
-        else:
-            return redirect('/tasks/finalPage')
+    #
+    # if  exp.Strategy != 8 and tl.index(task_id) == len(tl)-1:   #posible error
+    #     if exp.Replay and not exp.Mistake:
+    #         for id in tl:
+    #             task = Task.objects.get(id=id)
+    #             if task.Checking != 'Решено':
+    #                 ml.append(id)
+    #         exp.MistakeList = ','.join(ml)
+    #         exp.Mistake = True
+    #         exp.save()
+    #         return redirect('/tasks/mistakes/%s' % ml[0])
+    #     else:
+    #         return redirect('/tasks/finalPage')
     args = {}
     args.update(csrf(request))
     args['task'] = Task.objects.get(id=task_id)
