@@ -161,6 +161,12 @@ def addVariant_cl(request, task_id):
             # var.time = var.answerTime - t.startTime
             delta = var.AnswerTime - t.StartTime
             var.Time = round(delta, 2)
+            if t.Ans_number == 0:
+                t.var_time1 = var.Time
+            elif t.Ans_number == 1:
+                t.var_time2 = var.Time
+            elif t.Ans_number == 2:
+                t.var_time3 = var.Time
             t.Ans_number += 1
             t.save()
             form.save()
@@ -294,6 +300,12 @@ def addVariant(request, task_id):
             # var.time = var.answerTime - t.StartTime
             delta = var.AnswerTime - t.StartTime
             var.Time = round(delta, 2)
+            if t.Ans_number == 0:
+                t.var_time1 = var.Time
+            elif t.Ans_number == 1:
+                t.var_time2 = var.Time
+            elif t.Ans_number == 2:
+                t.var_time3 = var.Time
             t.Ans_number += 1
             t.save()
             form.save()

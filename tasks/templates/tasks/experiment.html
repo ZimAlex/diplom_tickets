@@ -20,6 +20,9 @@
         <th>Под-уровень</th>
         <th>Статус</th>
         <th>Кол-во вариантов</th>
+        <th>Время первого ответа</th>
+        <th>Время второго ответа</th>
+        <th>Время третьего ответа</th>
         <th>Среднее время решения задания</th>
         <th>Разница между след.</th>
 
@@ -32,6 +35,9 @@
             <td align="center">{{task.sub_lev}}</td>
             <td align="center">{{task.Checking}}</td>
             <td align="center">{{task.Ans_number}}</td>
+            <td align="center">{{task.var_time1}}</td>
+            <td align="center">{{task.var_time2}}</td>
+            <td align="center">{{task.var_time3}}</td>
             <td align="center">{{task.Time}}</td>
             <td align="center">{{task.Diff}}</td>
             <td align="center"><a href="{{task.id}}/var/"> Варианты </a></td>
