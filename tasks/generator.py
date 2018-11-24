@@ -311,13 +311,13 @@ def read(f=0):
         while r2 == r3 or r3 == r1:
             r3 = rd.randint(0,24)
         for i in range(0, len(wl)):
-            with open('level' + str(i+1) + '.txt') as inp:
+            with open('/home/Zelion/diplom_tickets/tasks/level' + str(i+1) + '.txt') as inp:
                 k = inp.readlines()
                 for j in [r1,r2,r3]:
                     key, val = k[j].strip().split(':')
                     wl[i][key] = val
         return wl
-    with open('level' + f + '.txt') as inp:
+    with open('/home/Zelion/diplom_tickets/tasks/level' + f + '.txt') as inp:
         for i in inp.readlines():
             key, val = i.strip().split(':')
             l[key] = val
