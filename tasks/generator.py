@@ -130,7 +130,7 @@ def generate_lv(level = 0):
                 l[k] = ''.join((str(i) for i in n))
                 break
         else:
-            return read()
+            return read() #generate()
     return l
 
 # def generate():

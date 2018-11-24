@@ -37,7 +37,7 @@ def generate(request):
         Name=request.user
     )
     exp.save(force_insert=True)
-    g = generator.generate()
+    g = generator.read()
     for lev in range(0, len(g)):
         for key in (g[lev]):
             t = Task(
