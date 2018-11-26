@@ -8,7 +8,7 @@
   <form method="post">
     {% csrf_token %}
     {% for field in form %}
-      <p style="color: white" style="align-content: center" style="align-items: center">
+      <p style="color: white" style="align-self: center">
         {{ field.label_tag }}<br>
         {{ field }}
 
