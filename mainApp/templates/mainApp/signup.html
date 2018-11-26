@@ -5,10 +5,10 @@
 
 {% block content %}
     <h3 align="center" style="color: white">Регистрация</h3>
-  <form method="post" style="align-content: center">
+  <form method="post">
     {% csrf_token %}
     {% for field in form %}
-      <p style="color: white" style="align-content: center" style="align-items: center"     align="center" >
+      <p style="color: white" style="align-content: center" style="align-items: center">
         {{ field.label_tag }}<br>
         {{ field }}
 
