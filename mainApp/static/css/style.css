@@ -40,6 +40,9 @@ input {
 	line-height: 1.5em;
 	padding: 0;
 	-webkit-appearance: none;
+	align-content: center;
+	align-items: center;
+	align-self: center;
 }
 
 p {
