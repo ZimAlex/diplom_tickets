@@ -19,6 +19,7 @@ body {
 	font-family: 'Open Sans', Arial, sans-serif;
 	font-size: 14px;
 	line-height: 1.5em;
+	position: center;
 }
 
 a {
@@ -116,7 +117,7 @@ p {
 	padding-left: 5px;
 }
 
-/* Стили бара vladmaxi, можно удалить */
+/* пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ vladmaxi, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
 .vladmaxi-top{
 	line-height: 24px;
 	font-size: 11px;
