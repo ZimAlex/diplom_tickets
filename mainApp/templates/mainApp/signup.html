@@ -4,11 +4,11 @@
 {%endblock%}
 
 {% block content %}
-    <h2 align="center">Регистрация</h2>
+    <h3 align="center" style="color: white">Регистрация</h3>
   <form method="post">
     {% csrf_token %}
     {% for field in form %}
-      <p style="color: white">
+      <p style="color: white" align="center">
         {{ field.label_tag }}<br>
         {{ field }}
 
