@@ -83,7 +83,7 @@ p {
 }
 
 #login form input[type="text"], input[type="password"] {
-	background-color: #3b4148;
+	background-color: white;
 	border-radius: 0px 3px 3px 0px;
 	-moz-border-radius: 0px 3px 3px 0px;
 	-webkit-border-radius: 0px 3px 3px 0px;
