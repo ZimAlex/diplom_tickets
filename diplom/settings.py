@@ -131,4 +131,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = "home/Zelion/diplom_tickets/static"
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'tasks/generate'
