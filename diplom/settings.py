@@ -130,7 +130,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#STATIC_ROOT = "home/Zelion/diplom_tickets/static"
+STATIC_ROOT = "home/Zelion/diplom_tickets/mainApp/static"
 
 
 STATICFILES_DIRS = (
