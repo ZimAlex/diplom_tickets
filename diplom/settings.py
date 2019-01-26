@@ -130,5 +130,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = "home/Zelion/diplom_tickets/static"
+#STATIC_ROOT = "home/Zelion/diplom_tickets/static"
+
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 LOGIN_REDIRECT_URL = 'tasks/generate'
