@@ -134,6 +134,6 @@ STATIC_ROOT = "home/Zelion/diplom_tickets/mainApp/static"
 
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'mainApp/static'),
 )
 LOGIN_REDIRECT_URL = 'tasks/generate'
