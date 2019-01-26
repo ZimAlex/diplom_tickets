@@ -27,7 +27,7 @@ def login_view(request):
             return redirect('tasks/generate')
     else:
         form = AuthenticationForm()
-    return render(request, 'mainApp/login.html',{'form':form})
+    return render(request, 'mainApp/login.html', {'form': form})
 
 
 # Create your views here.
